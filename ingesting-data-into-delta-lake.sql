@@ -3,6 +3,7 @@ USE CATALOG dbacademy;
 USE SCHEMA IDENTIFIER(DA.schema_name);
 
 -- 1. Create table (CTAS)
+-- read_files documentation: https://docs.databricks.com/aws/en/sql/language-manual/functions/read_files
 DROP TABLE IF EXISTS current_employees_ctas;
 
 CREATE TABLE current_employees_ctas
