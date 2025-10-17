@@ -38,3 +38,5 @@ COPY INTO current_employees_copyinto
   ''').display()
 
 DESCRIBE HISTORY current_employees_copyinto;
+
+-- 4. Auto Loader
