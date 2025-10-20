@@ -3,6 +3,7 @@ USE CATALOG dbacademy;
 USE SCHEMA IDENTIFIER(DA.schema_name);
 
 -- 1. Create table (CTAS)
+-- It processes all records each time it runs.
 -- read_files documentation: https://docs.databricks.com/aws/en/sql/language-manual/functions/read_files
 DROP TABLE IF EXISTS current_employees_ctas;
 
@@ -19,6 +20,7 @@ FROM read_files(
 -- 2. Upload UI
 
 -- 3. Copy into
+-- Incremental batch ingestion by default.
 DROP TABLE IF EXISTS current_employees_copyinto;
 
 CREATE TABLE current_employees_copyinto (
