@@ -1,0 +1,16 @@
+-- read_files(), spark.read or Auto Loader provides a rescued data column in the raw data does not match the schema
+
+-- _rescued_data
+
+SELECT *
+FROM read_files(
+        DA.paths_working_dir || '/csv_demo_files/malformed_example_1_data.csv',
+        format => "csv",
+        sep => "|",
+        header => true,
+        schema => '''
+            order_id INT, 
+            email STRING, 
+            transactions_timestamp BIGINT''', 
+        rescueddatacolumn => '_rescued_data'    -- Create the _rescued_data column
+      );
