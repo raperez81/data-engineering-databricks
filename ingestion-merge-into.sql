@@ -30,3 +30,17 @@ WHEN MATCHED AND source.status = 'delete' THEN
 WHEN NOT MATCHED THEN
   INSERT (id, first_name, email, sign_up_date, status)
   VALUES (source.id, source.first_name, source.email, source.sign_up_date, source.status);
+
+-- Schema evolution
+MERGE WITH SCHEMA EVOLUTION INTO main_users_target target  -- Use the MERGE WITH SCHEMA EVOLUTION INTO statement
+USING new_users_source source
+ON target.id = source.id
+WHEN MATCHED AND source.status = 'update' THEN
+  UPDATE SET 
+    target.email = source.email,
+    target.status = source.status
+WHEN MATCHED AND source.status = 'delete' THEN
+  DELETE
+WHEN NOT MATCHED AND source.status = 'new' THEN
+  INSERT (id, first_name, email, sign_up_date, status, country)
+  VALUES (source.id, source.first_name, source.email, source.sign_up_date, source.status, source.country);
